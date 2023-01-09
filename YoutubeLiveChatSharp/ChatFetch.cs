@@ -50,17 +50,21 @@ namespace YoutubeLiveChatSharp
 
             foreach (var item in a.AsArray())
             {
-                string message = "";
-
                 JsonNode? chats = item["addChatItemAction"]?["item"]?["liveChatTextMessageRenderer"];
+
+                string message = "";
+                string commentId = chats?["id"]?.ToString() ?? "";
+                string userName = chats?["authorName"]?["simpleText"]?.ToString() ?? "";
+                string userId = chats?["authorExternalChannelId"]?.ToString() ?? "";
+
                 if (chats == null) continue;
                 foreach (var chat in chats["message"]?["runs"]?.AsArray())
                 {
                     if (chat?["text"] == null) continue;
-                    message = chat["text"].ToString();
+                    message += chat["text"].ToString();
                 }
 
-                comments.Add(new Comment(message, "", "", ""));
+                comments.Add(new Comment(message, commentId, userName, userId));
             }
 
             return comments;
