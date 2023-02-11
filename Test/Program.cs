@@ -13,7 +13,8 @@ while (true)
     f.Fetch().ToList().ForEach(c => ShowComment(c));
 
     // 負荷を掛けすぎないようにちょっと待つ
-    await Task.Delay(1000);
+    //    await Task.Delay(1000);
+    Console.ReadKey(true);
 }
 
 void ShowComment(Comment c)

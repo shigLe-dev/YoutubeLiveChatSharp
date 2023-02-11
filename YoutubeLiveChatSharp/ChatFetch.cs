@@ -85,7 +85,7 @@ namespace YoutubeLiveChatSharp
 
             // OKじゃない場合はnullを返す
             if (response.StatusCode != System.Net.HttpStatusCode.OK) return null;
-
+            Console.WriteLine(response.Content.ReadAsStringAsync().Result);
             return response;
         }
 
